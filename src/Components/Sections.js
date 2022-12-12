@@ -21,7 +21,7 @@ export default function Sections(props){
     return (
     <>
     <Titulo><p>Selecione o horário</p></Titulo>
-    {sessoes.map((i) => <CardH key={i.id} w={i.weekday} d={i.date} fh={i.showtimes[0].name} sh={i.showtimes[1].name}/>)}
+    {sessoes.map((i) => <CardH key={i.id} w={i.weekday} d={i.date} fh={i.showtimes[0].name} sh={i.showtimes[1].name} fid={i.showtimes[0].id} sid={i.showtimes[1].id}/>)}
     <Footer img={props.movieURL} name={props.movieName}/>
     </>
     )

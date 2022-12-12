@@ -1,6 +1,13 @@
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom"
 export default function CardH(props){
-    return(<Card><p>{props.w} - {props.d}</p><button>{props.fh}</button> <button>{props.sh}</button></Card>)
+    const id1 = props.fid
+    const id2 = props.sid
+    const navigate = useNavigate()
+    function selectSection(id){
+        navigate(`/assentos/${id}`)
+    }
+    return(<Card><p>{props.w} - {props.d}</p><button onClick={() => selectSection(id1)}>{props.fh}</button> <button onClick={() => selectSection(id2)}>{props.sh}</button></Card>)
 }
 
 const Card = styled.div`
