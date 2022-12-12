@@ -1,7 +1,7 @@
 import styled from "styled-components"
 export default function Footer2(props){
     return(
-        <Fut><div><img src={props.img} alt='Poster'/></div><p>{props.name}<br/>{props.w} - {props.h}</p></Fut>
+        <Fut data-test="footer"><div><img src={props.img} alt='Poster'/></div><p>{props.name}<br/>{props.w} - {props.h}</p></Fut>
     )
 }
 const Fut = styled.div`

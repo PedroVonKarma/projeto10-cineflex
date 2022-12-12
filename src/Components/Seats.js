@@ -6,10 +6,11 @@ import Footer2 from "./Footer2"
 import CardA from "./CardA"
 import Legenda from "./Legenda"
 import Form from "./Form"
-export default function Seats(){
+export default function Seats(props){
     const [assent, setAssent] = useState([])
     const { idSessao } = useParams();
     const [listaAssentos, setListaAssentos] = useState([])
+    const [reservas, setReservas] = useState([])
     useEffect(() => {
         const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`);
 
@@ -25,9 +26,9 @@ export default function Seats(){
     return(
         <>
         <Titulo><p>Selecione o(s) assento(s)</p></Titulo>
-        <Assentos>{listaAssentos.map((i) => <CardA key={i.id} id={i.id} n={i.name} av={i.isAvailable}/>)}</Assentos>
+        <Assentos>{listaAssentos.map((i) => <CardA assentos={props.assentos} setAssentos={props.setAssentos} reservas={reservas} setReservas={setReservas} key={i.id} id={i.id} n={i.name} av={i.isAvailable}/>)}</Assentos>
         <Legenda/>
-        <Form/>
+        <Form reservas={reservas} name={props.name} cpf={props.cpf} setName={props.setName} setCpf={props.setCpf}/>
         <Footer2 img={assent.movie.posterURL} name={assent.movie.title} w={assent.day.weekday} h={assent.name}/>
         </>
     )

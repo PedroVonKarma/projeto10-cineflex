@@ -1,16 +1,33 @@
 import styled from "styled-components"
-export default function Form(){
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+export default function Form(props){
+    const navigate = useNavigate()
+    const setName = props.setName
+    const setCpf = props.setCpf
     function prosseguir(event){
         event.preventDefault();
-        alert('Deu bao')
+        if(props.reservas.length === 0){
+            alert('Selecione pelo menos 1 assento')
+            return
+        }
+        const ccc = props.cpf.replace('.', '')
+        const ddd = ccc.replace('-', '')
+        const obj = {
+            ids: props.reservas,
+            name: props.name,
+            cpf: ddd
+        }
+        const promise = axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', obj)
+        promise.then(() => navigate('/sucesso'))
     }
     return(
     <Furm onSubmit={prosseguir}>
         <p>Nome do comprador:</p>
-        <input required type='text' placeholder="Digite seu nome..."/>
+        <input data-test="client-name" value={props.name} onChange={(e) => setName(e.target.value)} required type='text' placeholder="Digite seu nome..."/>
         <p>CPF do comprador:</p>
-        <input required type="text" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="Digite seu CPF..."/>
-        <button>Reservar assento(s)</button>
+        <input data-test="client-cpf" value={props.cpf} onChange={(e) => setCpf(e.target.value)} required type="text" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: xxx.xxx.xxx-xx" placeholder="Digite seu CPF..."/>
+        <button data-test="book-seat-btn">Reservar assento(s)</button>
     </Furm>
     )
 }

@@ -3,19 +3,17 @@ import { useNavigate } from "react-router-dom"
 export default function CardM(props){
     const id = props.id
     const name = props.name
-    const setId = props.setId
     const setMovieName = props.setMovieName
     const setMovieURL = props.setMovieURL
     const navigate = useNavigate()
     function select(){
-        setId(id)
         setMovieName(name)
         setMovieURL(props.url)
         navigate(`/sessoes/${id}`)
     }
     
     return (
-        <Poster onClick={select}><img src={props.url} alt='Poster do filme'></img></Poster>
+        <Poster data-test="movie" onClick={select}><img src={props.url} alt='Poster do filme'></img></Poster>
     )
 }
 
