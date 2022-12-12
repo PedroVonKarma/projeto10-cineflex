@@ -11,7 +11,7 @@ export default function Form(props){
             alert('Selecione pelo menos 1 assento')
             return
         }
-        const ccc = props.cpf.replace('.', '')
+        const ccc = props.cpf.replaceAll('.', '')
         const ddd = ccc.replace('-', '')
         const obj = {
             ids: props.reservas,
